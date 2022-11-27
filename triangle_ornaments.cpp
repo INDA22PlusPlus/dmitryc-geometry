@@ -38,19 +38,25 @@ double get_double_length_lower_triangle(double angle, double hypotenuse) {
     return sin(angle) * hypotenuse * 2;
 }
 
-int main() {
-    int a = 4, b = 5, c = 4;
-//    double A = area_triangle(a, b, c);
-//    double h = get_relative_height(a, b, c, A);
-    double median_c = get_median_c(a, b, c);
-    double half_c = c / 2.0;
-    double median_c_angle = get_angle_lowe_triangle(median_c, half_c, b);
-    double length = get_double_length_lower_triangle(median_c_angle, half_c);
 
-//    cout << "Area: " << A << endl;
-    cout << "Median c: " << median_c << endl;
-    cout << "Angle lower triangle (rad): " << median_c_angle << endl;
-    cout << "Length: " << length << endl;
-//    cout << "Height: " << h << endl;
+int main() {
+    int cases;
+    cin >> cases;
+    double sum = 0.0;
+    for (int i = 0; i < cases; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+
+        // Calculate the length using over the top trigonometry
+        double median_c = get_median_c(a, b, c);
+        double half_c = c / 2.0;
+        double median_c_angle = get_angle_lowe_triangle(median_c, half_c, b);
+        double length = get_double_length_lower_triangle(median_c_angle, half_c);
+
+        sum += length;
+    }
+
+    cout << sum;
+
     return 0;
 }
