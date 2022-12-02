@@ -5,6 +5,20 @@ using namespace std;
 
 const int INF = 1000000005;
 
+pair<int, int> add(pair<int, int> a, pair<int, int> b, char sign = '+') {
+    if (sign == '+') {
+        return {a.first + b.first, a.second + b.second};
+    } else {
+        return {a.first - b.first, a.second - b.second};
+    }
+}
+
+bool left(pair<int, int> a, pair<int, int> b, pair<int, int> c) {
+    return add(b, a, '-').first * add(c, a, '-').second -
+    add(a, b, '-').second * add(c, a, '-').first
+    > 0;
+}
+
 int main() {
     int test_cases;
     cin >> test_cases;
@@ -29,9 +43,18 @@ int main() {
     // Loop through all points
     for (auto points: all_points) {
         // Find highest point, O(N)
+        pair<int, int> a, b, c, d;
+        a = points[0];
+        b = points[1];
+        c = points[2];
+        d = points[3];
         for (auto point: points) {
             cout << "X: " << point.first << " Y: " << point.second << endl;
         }
+
+        cout << left(a, b, c) << endl;
+
+
         cout << endl;
     }
 }
