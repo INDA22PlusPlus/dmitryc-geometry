@@ -14,9 +14,10 @@ pair<int, int> add(pair<int, int> a, pair<int, int> b, char sign = '+') {
 }
 
 bool left(pair<int, int> a, pair<int, int> b, pair<int, int> c) {
-    return add(b, a, '-').first * add(c, a, '-').second -
-    add(a, b, '-').second * add(c, a, '-').first
-    > 0;
+    auto b_a = add(b, a, '-');
+    auto c_a = add(c, a, '-');
+
+    return b_a.first * c_a.second - b_a.second * c_a.first > 0;
 }
 
 int main() {
@@ -48,13 +49,18 @@ int main() {
         b = points[1];
         c = points[2];
         d = points[3];
-        for (auto point: points) {
-            cout << "X: " << point.first << " Y: " << point.second << endl;
+//        for (auto point: points) {
+//            cout << "X: " << point.first << " Y: " << point.second << endl;
+//        }
+        if ((left(a, b, c) and left(a, b, d)) or (not left(a, b, c) and not left(a, b, d))) {
+            cout << left(a, b, c) << left(a, b, d) << not left(a, b, c) << not left(a, b, d);
+            if ((left(c, d, a) and left(c, d, b)) or (not left(c, d, a) and not left(c, d, b))) {
+                cout << "none" << endl;
+            }
         }
 
-        cout << left(a, b, c) << endl;
+//        cout << left(a, b, c) << endl;
 
-
-        cout << endl;
+//        cout << endl;
     }
 }
